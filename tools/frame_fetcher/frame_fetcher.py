@@ -31,16 +31,20 @@ config.read("./tools/frame_fetcher/FETCHER_CONFIG.ini")
 print_log("OK", "Configuration file read successfully!")
 
 START_TIME = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
-FETCH_URL = config['DEFAULT']['FETCH_URL']
+YOUTUBE_URL = config['DEFAULT']['YOUTUBE_URL']
 TIME_DELAY = config['DEFAULT']['TIME_DELAY']
 TOTAL_DURATION = config['DEFAULT']['TOTAL_DURATION']
+
+print_log("LOG", "Creating direct live-stream URL for resource...")
+FETCH_URL = os.popen(f"youtube-dl -g {YOUTUBE_URL}").read()
+print_log("OK", "Live stream direct URL successfully created!")
 
 print_log("LOG", f"Creating directory for {START_TIME} frame fetch run...")
 os.mkdir(f"./model/data/raw_data/{START_TIME}")
 print_log("OK", "Directory created successfully!")
 
 print_log("LOG", f"Launching frame fetch run for {TOTAL_DURATION} seconds...")
-os.system(f"ffmpeg -hide_banner -loglevel error -i {FETCH_URL} -vf fps=1/{TIME_DELAY} -t {TOTAL_DURATION} "
+os.system(f"ffmpeg -hide_banner -loglevel error -i \"{FETCH_URL}\" -vf fps=1/{TIME_DELAY} -t {TOTAL_DURATION} "
           f"model/data/raw_data/{START_TIME}/out%d.png")
 print_log("OK", f"Finished {START_TIME} frame fetch run!")
 

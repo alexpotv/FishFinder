@@ -14,7 +14,7 @@ The following dependencies must be installed on the local system:
 ## Configuration file
 
 The configuration file (`FETCHER_CONFIG.ini`) contains the following configuration values:
-- **FETCH_URL**: The direct URL to the live stream from which to fetch the frame(s)
+- **YOUTUBE_URL**: The YouTube live stream URL to fetch frames from
 - **TIME_DELAY**: The delay (in seconds) between each frame being fetched
 - **TOTAL_DURATION**: The total duration of the frame-fetching session
 
