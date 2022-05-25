@@ -1,0 +1,8 @@
+train: ../model/data/images/train/
+val: ../model/data/images/val/
+
+# Number of classes
+nc: 1
+
+# Class names
+names: ["fish"]
