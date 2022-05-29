@@ -16,6 +16,10 @@ from fast_ml.model_development import train_valid_test_split
 BASE_PATH = "./model/data/"
 BASE_IMAGES_PATH = "./model/data/raw_data/"
 
+TRAIN_SIZE = 0.8
+VALID_SIZE = 0.1
+TEST_SIZE = 0.1
+
 
 def voc_to_yolo_bbox(bbox, w, h):
     """
@@ -101,9 +105,9 @@ os.mkdir(f"{BASE_PATH}labels/test")
 files = pd.DataFrame({"Images": expected_image_files, "Annotations": annotation_files})
 X_train, y_train, X_valid, y_valid, X_test, y_test = train_valid_test_split(files,
                                                                             target="Annotations",
-                                                                            train_size=0.8,
-                                                                            valid_size=0.1,
-                                                                            test_size=0.1)
+                                                                            train_size=TRAIN_SIZE,
+                                                                            valid_size=VALID_SIZE,
+                                                                            test_size=TEST_SIZE)
 
 # Copy training, validation and testing images to new location
 for train_file in X_train.Images:
@@ -139,34 +143,6 @@ for test_annotation in y_test:
                   encoding="utf-8") as f:
             f.write("\n".join(result))
 
-"""
-for directory in input_directories:
-    if not os.path.isdir(BASE_PATH + f"annotations/{directory}"):
-        os.mkdir(BASE_PATH + F"annotations/{directory}")
-
-    for file in glob.glob(BASE_PATH + f"raw_data/{directory}/*.xml"):
-        result = []
-
-        tree = ET.parse(file)
-        root = tree.getroot()
-        width = int(root.find("size").find("width").text)
-        height = int(root.find("size").find("height").text)
-
-        for obj in root.findall('object'):
-            label = obj.find("name").text
-            if label not in classes:
-                classes.append(label)
-            index = classes.index(label)
-            pil_bbox = [int(x.text) for x in obj.find("bndbox")]
-            yolo_bbox = voc_to_yolo_bbox(pil_bbox, width, height)
-            bbox_string = " ".join([str(x) for x in yolo_bbox])
-            result.append(f"{index} {bbox_string}")
-
-        filename = os.path.basename(file).split('.')[0]
-        if result:
-            with open(BASE_PATH + f"annotations/{directory}/{filename}.txt", "w", encoding="utf-8") as f:
-                f.write("\n".join(result))
-"""
-
+# Creating classes file containing all classes in annotations
 with open(f"{BASE_PATH}classes.txt", 'w', encoding='utf8') as f:
     f.write(json.dumps(classes))
