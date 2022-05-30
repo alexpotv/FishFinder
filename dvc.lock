@@ -1,0 +1,21 @@
+schema: '2.0'
+stages:
+  data_splitting:
+    cmd: python model/train_val_test_split.py
+    deps:
+    - path: model/data/raw_data
+      md5: 58d43b409ac9b335cb0ada7ece1c0b2b.dir
+      size: 85254561
+      nfiles: 84
+    outs:
+    - path: model/data/classes.txt
+      md5: 049b29a657acb53b81a36d305a499f40
+      size: 8
+    - path: model/data/images
+      md5: 5cd77ea633387e6c2e1f4013596ed446.dir
+      size: 65009509
+      nfiles: 36
+    - path: model/data/labels
+      md5: e6c0433a710e2105dc22d14138b97913.dir
+      size: 31244
+      nfiles: 36

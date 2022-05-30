@@ -3,6 +3,3 @@
 # https://dvc.org/doc/user-guide/dvcignore
 
 .DS_Store
-model/data/images/*
-model/data/labels/*
-model/data/classes.txt

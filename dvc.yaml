@@ -1,0 +1,9 @@
+stages:
+  data_splitting:
+    cmd: python model/train_val_test_split.py
+    deps:
+    - model/data/raw_data
+    outs:
+    - model/data/classes.txt
+    - model/data/images
+    - model/data/labels

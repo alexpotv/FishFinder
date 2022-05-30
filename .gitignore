@@ -1,3 +1,6 @@
 .idea
 .DS_Store
 /yolov5s.pt
+model/data/images
+model/data/labels
+model/data/classes.txt
