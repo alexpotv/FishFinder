@@ -4,9 +4,9 @@ jobs:
   run:
     runs-on: ubuntu-latest
     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
-    env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
     steps:
+      - name: Initialize Google Cloud Platform credentials information
+        run: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }} >> .dvc/application_default_credentials.json
       - uses: actions/checkout@v2
       - uses: iterative/setup-cml@v1
       - name: Run DVC Pipeline
