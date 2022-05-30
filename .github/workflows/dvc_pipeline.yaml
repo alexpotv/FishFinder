@@ -8,7 +8,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: iterative/setup-cml@v1
       - name: Initialize Google Cloud Platform credentials information
-        run: echo ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }} >> .dvc/application_default_credentials.json
+        env:
+          CREDENTIALS_FILE_CONTENT: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+        run: echo env.CREDENTIALS_FILE_CONTENT >> .dvc/application_default_credentials.json
       - name: Run DVC Pipeline
         run: |
           pip install -r requirements.txt
