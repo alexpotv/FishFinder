@@ -20,6 +20,7 @@ jobs:
           export_environment_variables: true
       - name: Run DVC Pipeline
         run: |
+          echo ${GOOGLE_APPLICATION_CREDENTIALS}
           pip install -r requirements.txt
           dvc pull
           dvc repro
