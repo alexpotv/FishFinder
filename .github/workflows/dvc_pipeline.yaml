@@ -16,6 +16,8 @@ jobs:
         with:
           workload_identity_provider: 'projects/406343717543/locations/global/workloadIdentityPools/fishfinder-github/providers/github-provider'
           service_account: 'fishfinder-github@fishfinder-349617.iam.gserviceaccount.com'
+          create_credentials_file: true
+          export_environment_variables: true
       - name: Run DVC Pipeline
         run: |
           pip install -r requirements.txt
