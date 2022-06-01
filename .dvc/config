@@ -2,4 +2,3 @@
     remote = googlecloud
 ['remote "googlecloud"']
     url = gs://fish-finder-data
-    credentialpath = application_default_credentials.json
