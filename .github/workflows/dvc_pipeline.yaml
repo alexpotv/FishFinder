@@ -21,4 +21,5 @@ jobs:
       - name: Run DVC Pipeline
         run: |
           echo ${GOOGLE_APPLICATION_CREDENTIALS}
+          gcloud auth list
           dvc pull
