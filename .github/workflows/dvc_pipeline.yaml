@@ -18,6 +18,8 @@ jobs:
           service_account: 'fishfinder-github@fishfinder-349617.iam.gserviceaccount.com'
           create_credentials_file: true
           #export_environment_variables: true
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
       - name: Run DVC Pipeline
         run: |
           echo ${GOOGLE_APPLICATION_CREDENTIALS}
