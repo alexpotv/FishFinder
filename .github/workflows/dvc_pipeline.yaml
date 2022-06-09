@@ -21,7 +21,7 @@ jobs:
       - id: 'gcloud'
         name: 'gcloud'
         run: |-
-          gcloud auth list
+          gcloud config set account 'fishfinder-github@fishfinder-349617.iam.gserviceaccount.com'
       - name: Run DVC Pipeline
         run: |
           echo ${GOOGLE_APPLICATION_CREDENTIALS}
