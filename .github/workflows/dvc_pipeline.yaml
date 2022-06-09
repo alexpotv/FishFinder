@@ -26,4 +26,5 @@ jobs:
         run: |
           echo ${GOOGLE_APPLICATION_CREDENTIALS}
           gcloud auth list
+          gcloud alpha storage ls gs://fish-finder-data
           dvc pull
