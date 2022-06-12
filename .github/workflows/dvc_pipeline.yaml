@@ -24,4 +24,8 @@ jobs:
           gcloud config set account 'fishfinder-github@fishfinder-349617.iam.gserviceaccount.com'
       - name: Run DVC Pipeline
         run: |
+          echo ${GOOGLE_APPLICATION_CREDENTIALS}
+          gcloud auth list
+          gcloud components install alpha --quiet
+          gcloud alpha storage ls gs://fish-finder-bucket
           dvc pull
