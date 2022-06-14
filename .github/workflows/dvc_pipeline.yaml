@@ -15,16 +15,8 @@ jobs:
         uses: 'google-github-actions/auth@v0.8.0'
         with:
           credentials_json: ${{ secrets.GCLOUD_CREDENTIALS }}
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v0'
-      #- id: 'gcloud'
-      #  name: 'gcloud'
-      #  run: |-
-      #    gcloud config set account 'fishfinder-github@fishfinder-349617.iam.gserviceaccount.com'
-      - name: Run DVC Pipeline
+      - id: 'dvc'
+        name: Run DVC Pipeline
         run: |
-          echo ${GOOGLE_APPLICATION_CREDENTIALS}
-          gcloud auth list
-          gcloud components install alpha --quiet
-          gcloud alpha storage ls gs://fish-finder-bucket
           dvc pull
+          dvc repro
