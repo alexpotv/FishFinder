@@ -14,9 +14,7 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.8.0'
         with:
-          workload_identity_provider: 'projects/406343717543/locations/global/workloadIdentityPools/fishfinder-github/providers/github-provider'
-          service_account: 'fishfinder-github@fishfinder-349617.iam.gserviceaccount.com'
-          token_format: 'access_token'
+          credentials_json: ${{ secrets.GCLOUD_CREDENTIALS }}
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
       #- id: 'gcloud'
