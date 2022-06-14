@@ -25,7 +25,6 @@ jobs:
         run: |
           echo ${GOOGLE_APPLICATION_CREDENTIALS}
           gcloud auth list
-          gcloud auth login
           gcloud components install alpha --quiet
           gcloud alpha storage ls gs://fish-finder-bucket
           dvc pull
