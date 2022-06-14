@@ -13,3 +13,4 @@ requests~=2.27.1
 thop~=0.0.31-2005241907
 fast-ml
 IPython
+scikit-learn
