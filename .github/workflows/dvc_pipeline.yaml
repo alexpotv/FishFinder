@@ -18,5 +18,6 @@ jobs:
       - id: 'dvc'
         name: Run DVC Pipeline
         run: |
+          pip install -r requirements.txt
           dvc pull
           dvc repro
