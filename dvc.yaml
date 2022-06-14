@@ -3,7 +3,11 @@ stages:
     cmd: python model/train_val_test_split.py
     deps:
     - model/data/raw_data
+    - model/train_val_test_split.py
     outs:
-    - model/data/classes.txt
-    - model/data/images
-    - model/data/labels
+    - model/data/classes.txt:
+        cache: false
+    - model/data/images:
+        cache: false
+    - model/data/labels:
+        cache: false
