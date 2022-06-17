@@ -5,9 +5,14 @@ stages:
     - model/data/raw_data
     - model/train_val_test_split.py
     outs:
-    - model/data/classes.txt:
-        cache: false
-    - model/data/images:
-        cache: false
-    - model/data/labels:
-        cache: false
+    - model/data/classes.txt
+    - model/data/images
+    - model/data/labels
+  model_training:
+    cmd: python yolov5/train.py --img 640 --batch 1 --epochs 5 --data model/dataset.yaml --weights yolov5s.pt --hyp model/hyp.scratch.yaml
+    deps:
+      - model/data/classes.txt
+      - model/data/images
+      - model/data/labels
+    outs:
+      - yolov5/runs/train/exp
