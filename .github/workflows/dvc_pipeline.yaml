@@ -27,4 +27,4 @@ jobs:
       - id: 'dvc_repro'
         name: 'Reproduce all stages of DVC pipeline'
         run: |
-          dvc repro
+          dvc repro -f
