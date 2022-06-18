@@ -24,6 +24,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install -r yolov5/requirements.txt
+          apt-get update && apt-get install libgl1
       - id: 'dvc_pull'
         name: 'Pull data from remote'
         run: |
