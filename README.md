@@ -1,8 +1,11 @@
 # FishFinder
+
 Computer vision project based on images from Monterey Bay Aquarium's live-streaming camera.
 
-## For training
+## Model
 
-From project root:
+The model used for object detection is **[YoloV5, by Ultralytics](https://github.com/ultralytics/yolov5)**. Feel free to check out their GitHub repository to learn more about this model.
 
-`python yolov5/train.py --img 640 --batch 1 --epochs 5 --data model/dataset.yaml --weights yolov5s.pt --hyp model/hyp.scratch.yaml`
+### Dataset
+
+The model has been trained on a custom dataset, composed of images from the Aquarium, which have been manually annotated.
