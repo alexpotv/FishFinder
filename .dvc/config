@@ -1,4 +1,4 @@
 [core]
     remote = googlecloud
 ['remote "googlecloud"']
-    url = gs://fish-finder-data
+    url = gs://fish-finder-bucket
