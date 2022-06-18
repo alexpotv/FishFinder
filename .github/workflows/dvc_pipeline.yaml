@@ -9,16 +9,21 @@ jobs:
       id-token: 'write'
     steps:
       - uses: actions/checkout@v3
+      - uses: iterative/setup-cml@v1
       - id: 'clone_yolov5'
         name: 'Clone YoloV5 locally'
         run: |
           git clone https://github.com/ultralytics/yolov5.git
-      - uses: iterative/setup-cml@v1
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.8.0'
         with:
           credentials_json: ${{ secrets.GCLOUD_CREDENTIALS }}
+      - id: 'install_requirements'
+        name: 'Install requirements'
+        run: |
+          pip install -r requirements.txt
+          pip install -r yolov5/requirements.txt
       - id: 'dvc_pull'
         name: 'Pull data from remote'
         run: |
