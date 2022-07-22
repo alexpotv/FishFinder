@@ -7,8 +7,6 @@ import torch
 import sys
 
 
-#st.set_page_config(layout="wide")
-
 _, col2, _ = st.columns([0.3, 0.4, 0.3])
 
 col2.title("FishFinder")
