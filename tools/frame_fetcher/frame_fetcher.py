@@ -11,8 +11,10 @@ def get_frame():
     Fetches the current frame from the live-stream
     :return: The frame, as an object
     """
+    fetcher_config = configparser.ConfigParser()
+    fetcher_config.read("./tools/frame_fetcher/FETCHER_CONFIG.ini")
     config = configparser.ConfigParser()
-    config.read("./tools/frame_fetcher/FETCHER_CONFIG.ini")
+    config.read("config.ini")
     youtube_url = config['DEFAULT']['YOUTUBE_URL']
 
     fetch_url = os.popen(f"youtube-dl -g {youtube_url}").read()

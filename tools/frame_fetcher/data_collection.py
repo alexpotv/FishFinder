@@ -30,17 +30,20 @@ def print_log(msg_type: str, message: str):
     print(f"{color}{datetime.datetime.now().strftime('%H:%M:%S')} - [{msg_type}] {message}")
 
 
-CONFIG_PATH = "./utils/frame_fetcher/FETCHER_CONFIG.ini"
+FETCHER_CONFIG_PATH = "./tools/frame_fetcher/FETCHER_CONFIG.ini"
+CONFIG_PATH = "config.ini"
 
-print_log("LOG", "Reading configuration file...")
+print_log("LOG", "Reading configuration files...")
 config = configparser.ConfigParser()
 config.read(CONFIG_PATH)
-print_log("OK", "Configuration file read successfully!")
+fetcher_config = configparser.ConfigParser()
+fetcher_config.read(FETCHER_CONFIG_PATH)
+print_log("OK", "Configuration files read successfully!")
 
 START_TIME = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
 YOUTUBE_URL = config['DEFAULT']['YOUTUBE_URL']
-TIME_DELAY = config['DEFAULT']['TIME_DELAY']
-TOTAL_DURATION = config['DEFAULT']['TOTAL_DURATION']
+TIME_DELAY = fetcher_config['DEFAULT']['TIME_DELAY']
+TOTAL_DURATION = fetcher_config['DEFAULT']['TOTAL_DURATION']
 nb_iterations = int(float(TOTAL_DURATION)/float(TIME_DELAY))
 
 print_log("LOG", f"Creating directory for {START_TIME} frame fetch run...")
