@@ -7,17 +7,17 @@ import torch
 import sys
 
 
-st.set_page_config(layout="wide")
+#st.set_page_config(layout="wide")
 
-st.title("FishFinder")
+_, col2, _ = st.columns([0.3, 0.4, 0.3])
 
-col1, col2 = st.columns(2)
+col2.title("FishFinder")
 
-col1.header("Aquarium Live-Stream")
+col2.header("Aquarium Live-Stream")
 
-col1.markdown("This is the live-stream from the Monterey Bay Aquarium.")
+col2.markdown("This is the live-stream from the Monterey Bay Aquarium.")
 
-col1.video("https://www.youtube.com/watch?v=zCt2V-bwDRE")
+col2.video("https://www.youtube.com/watch?v=zCt2V-bwDRE")
 
 col2.header("Frame Analysis")
 
@@ -29,9 +29,7 @@ col2.subheader("Result")
 
 with st.spinner("Getting the latest frame..."):
     image = get_frame()
-    st.image(image)
     model = torch.hub.load('ultralytics/yolov5', 'custom', path='yolov5s', force_reload=True)
     results = model(image)
-    results.display(render=True)
-    st.image(results.imgs[0])
-    st.text(results)
+    #results.display(render=True)
+    col2.image(results.imgs[0], use_column_width=True)
