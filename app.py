@@ -30,4 +30,5 @@ with st.spinner("Getting the latest frame..."):
     image = get_frame()
     model = torch.hub.load('ultralytics/yolov5', 'custom', path='yolov5s', force_reload=True)
     results = model(image)
+    results.display(render=True)
     col2.image(results.imgs[0], use_column_width=True)
