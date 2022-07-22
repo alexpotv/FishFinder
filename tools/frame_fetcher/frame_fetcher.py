@@ -12,7 +12,7 @@ def get_frame():
     :return: The frame, as an object
     """
     config = configparser.ConfigParser()
-    config.read("./utils/frame_fetcher/FETCHER_CONFIG.ini")
+    config.read("./tools/frame_fetcher/FETCHER_CONFIG.ini")
     youtube_url = config['DEFAULT']['YOUTUBE_URL']
 
     fetch_url = os.popen(f"youtube-dl -g {youtube_url}").read()
