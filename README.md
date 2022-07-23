@@ -1,6 +1,24 @@
 # FishFinder
 
-Computer vision project based on images from Monterey Bay Aquarium's live-streaming camera.
+**FishFinder** is a computer vision project based on images from Monterey Bay Aquarium's live-streaming camera.
+
+## Interacting with FishFinder
+
+### Installing the requirements
+
+To launch the app, make sure the environment you are using is up-to-date py running the following command from the root 
+of the project:
+
+```pip install -r requirements.txt```
+
+### Launching the Streamlit interface
+
+To launch the Streamlit web interface locally, run the following command from the root of the project:
+
+```streamlit run app.py```
+
+Streamlit will open a new browser tab with the interface. If the browser tab does not pop up, simply take a look at the 
+console, where the local URL will be displayed.
 
 ## Model
 
