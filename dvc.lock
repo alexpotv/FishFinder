@@ -34,9 +34,9 @@ stages:
       size: 65009509
       nfiles: 36
     - path: model/data/labels
-      md5: caa63961511f9f5f5d4ef39cc682f7db.dir
-      size: 48440
-      nfiles: 38
+      md5: 173a97ddf1a3f85dcf202e99f29a8308.dir
+      size: 31244
+      nfiles: 36
     outs:
     - path: yolov5/runs/train/exp
       md5: 0c8832c73e3ca8a20ea2aa0bfa7fc023.dir
