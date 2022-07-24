@@ -4,9 +4,9 @@ stages:
     cmd: python model/train_val_test_split.py
     deps:
     - path: model/data/raw_data
-      md5: b57a6d2912de8e7ed7aba7e36c43881f.dir
-      size: 127235395
-      nfiles: 107
+      md5: 285e24a53094d4da7032c6d4df8ce922.dir
+      size: 127300437
+      nfiles: 130
     - path: model/train_val_test_split.py
       md5: f0f375a4936ed57a1ba80c6be3737060
       size: 5654
