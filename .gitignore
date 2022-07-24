@@ -5,3 +5,4 @@ model/data/images
 model/data/labels
 model/data/classes.txt
 yolov5
+*.pyc
