@@ -15,30 +15,30 @@ stages:
       md5: 049b29a657acb53b81a36d305a499f40
       size: 8
     - path: model/data/images
-      md5: d9ce1db8fca0fee43c859bd0f5407edd.dir
-      size: 65009509
-      nfiles: 36
+      md5: df183c44507725a91a4c87ed04ffeb41.dir
+      size: 105188908
+      nfiles: 59
     - path: model/data/labels
-      md5: 173a97ddf1a3f85dcf202e99f29a8308.dir
-      size: 31244
-      nfiles: 36
+      md5: dda4f60282950edc94a49ac4b2aa15b7.dir
+      size: 72972
+      nfiles: 61
   model_training:
-    cmd: python yolov5/train.py --img 640 --batch 1 --epochs 5 --data model/dataset.yaml
-      --weights yolov5s.pt --hyp model/hyp.scratch.yaml
+    cmd: python yolov5/train.py --img 640 --batch 1 --epochs 100 --data model/dataset.yaml
+      --weights yolov5s.pt --hyp model/hyp.scratch.yaml --device mps
     deps:
     - path: model/data/classes.txt
       md5: 049b29a657acb53b81a36d305a499f40
       size: 8
     - path: model/data/images
-      md5: d9ce1db8fca0fee43c859bd0f5407edd.dir
-      size: 65009509
-      nfiles: 36
+      md5: df183c44507725a91a4c87ed04ffeb41.dir
+      size: 105188908
+      nfiles: 59
     - path: model/data/labels
-      md5: 173a97ddf1a3f85dcf202e99f29a8308.dir
-      size: 31244
-      nfiles: 36
+      md5: dda4f60282950edc94a49ac4b2aa15b7.dir
+      size: 72972
+      nfiles: 61
     outs:
     - path: yolov5/runs/train/exp
-      md5: 0c8832c73e3ca8a20ea2aa0bfa7fc023.dir
-      size: 31051127
-      nfiles: 21
+      md5: acb242a771fc3b4d4cdf90f3e406b717.dir
+      size: 31651629
+      nfiles: 23
