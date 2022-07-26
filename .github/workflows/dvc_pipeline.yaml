@@ -1,5 +1,4 @@
 name: DVC Pipeline
-runs-on:
 on:
   push:
     branches:
