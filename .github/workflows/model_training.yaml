@@ -16,7 +16,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_APP_CREDENTIALS_DATA }}
         run: |
-          cml runner --labels=self-hosted --single --cloud-gpu=v100 --cloud=gcp --cloud-region=us-central1-c --cloud-type=n1-standard-1 --labels=cml-gpu
+          cml runner --labels=self-hosted --single --cloud-gpu=v100 --cloud=gcp --cloud-region=us-west1-b --cloud-type=n1-standard-1 --labels=cml-gpu
   train-model:
     needs: deploy-runner
     runs-on: self-hosted
