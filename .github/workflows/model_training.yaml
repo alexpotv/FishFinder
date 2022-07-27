@@ -18,6 +18,7 @@ jobs:
         run: |
           cml runner --labels=self-hosted --single --cloud=gcp --cloud-region=us-central1-b --cloud-type=a2-highgpu-1g --labels=cml-gpu
   train-model:
+    needs: deploy-runner
     runs-on: self-hosted
     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     permissions:
