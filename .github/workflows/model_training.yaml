@@ -1,13 +1,30 @@
-name: DVC Pipeline
+name: Model Training
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
-      - main
+      - dev
 jobs:
-  run:
+  deploy-runner:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: iterative/setup-cml@v1
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Deploy runner on GCP Compute Engine instance
+        env:
+          REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_APP_CREDENTIALS_DATA }}
+        run: |
+          cml runner \
+              --labels=cml,self-hosted \
+              --no-retry \
+              --single \
+              --cloud=aws \
+              --cloud-region=northamerica-northeast1-c \
+              --cloud-type=m+t4 \
+              --labels=cml-gpu
+  train-model:
     runs-on: self-hosted
     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     permissions:
