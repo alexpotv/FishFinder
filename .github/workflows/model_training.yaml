@@ -17,7 +17,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_APP_CREDENTIALS_DATA }}
         run: |
-          cml runner --labels=cml-gpu --single --cloud=gcp --cloud-region=us-west1-b --cloud-type=m+k80 --cloud-gpu=k80
+          cml runner --labels=cml-gpu --single --cloud=gcp --cloud-region=us-west1-b --cloud-type=m+nvidia-tesla-k80 --cloud-gpu=k80
   train-model:
     if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
     needs: deploy-runner
@@ -53,3 +53,4 @@ jobs:
         name: 'Reproduce all stages of DVC pipeline'
         run: |
           dvc repro -f
+          dvc push
