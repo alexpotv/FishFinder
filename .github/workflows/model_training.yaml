@@ -16,9 +16,9 @@ jobs:
           REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_APP_CREDENTIALS_DATA }}
         run: |
-          cml runner --labels=self-hosted --single --cloud-gpu=v100 --cloud=gcp --cloud-region=us-west1-b --cloud-type=n1-standard-1 --labels=cml-gpu
+          cml runner --labels=cml-cpu --single --cloud=gcp --cloud-region=us-west1-b --cloud-type=n1-standard-1
   train-model:
-    runs-on: cml-gpu
+    runs-on: cml-cpu
     container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     permissions:
       contents: 'read'
