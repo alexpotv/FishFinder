@@ -19,8 +19,8 @@ stages:
       size: 105188908
       nfiles: 59
     - path: model/data/labels
-      md5: dda4f60282950edc94a49ac4b2aa15b7.dir
-      size: 72972
+      md5: de5535e1a24702868699b9e403e0502a.dir
+      size: 73137
       nfiles: 61
   model_training:
     cmd: python yolov5/train.py --img 640 --batch 1 --epochs 100 --data model/dataset.yaml
@@ -34,11 +34,11 @@ stages:
       size: 105188908
       nfiles: 59
     - path: model/data/labels
-      md5: dda4f60282950edc94a49ac4b2aa15b7.dir
-      size: 72972
+      md5: de5535e1a24702868699b9e403e0502a.dir
+      size: 73137
       nfiles: 61
     outs:
     - path: yolov5/runs/train/exp
-      md5: acb242a771fc3b4d4cdf90f3e406b717.dir
-      size: 31651629
+      md5: 252f56cc0fd3007a6af3189da3f40629.dir
+      size: 31685358
       nfiles: 23
