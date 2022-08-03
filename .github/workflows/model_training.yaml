@@ -22,7 +22,9 @@ jobs:
     if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
     needs: deploy-runner
     runs-on: cml-gpu
-    # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
+    container:
+      image: docker://ghcr.io/iterative/cml:0-dvc2-base1
+      options: --gpus all
     permissions:
       contents: 'read'
       id-token: 'write'
