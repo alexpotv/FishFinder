@@ -23,8 +23,8 @@ stages:
       size: 46292
       nfiles: 59
   model_training:
-    cmd: python yolov5/train.py --img 640 --batch 1 --epochs 5 --data model/dataset.yaml
-      --weights yolov5s.pt --hyp model/hyp.scratch.yaml --device cpu
+    cmd: python yolov5/train.py --img 640 --batch 1 --epochs 100 --data model/dataset.yaml
+      --weights yolov5s.pt --hyp model/hyp.scratch.yaml --device 0
     deps:
     - path: model/data/classes.txt
       md5: 049b29a657acb53b81a36d305a499f40
@@ -34,9 +34,9 @@ stages:
       size: 105188908
       nfiles: 59
     - path: model/data/labels
-      md5: 3e867147ae28584fb29f1a1fe0e3f417.dir
-      size: 73136
-      nfiles: 61
+      md5: 433eaabf5881f35164a155ae878f621f.dir
+      size: 46292
+      nfiles: 59
     outs:
     - path: yolov5/runs/train/exp
       md5: 97977a233a2a10a71958e374741483eb.dir

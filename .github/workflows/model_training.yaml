@@ -49,14 +49,10 @@ jobs:
       - id: 'dvc_pull'
         name: 'Pull data from remote'
         run: |
-          pip install -r requirements.txt
           dvc pull
-      - id: 'cuda_devices'
-        name: 'Identify CUDA devices'
-        run: |
-          nvidia-smi
       - id: 'dvc_repro'
-        name: 'Reproduce all stages of DVC pipeline'
+        name: 'Reproduce and commit all stages of DVC pipeline'
         run: |
           dvc repro -f
+          dvc commit --quiet
           dvc push

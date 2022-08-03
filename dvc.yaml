@@ -16,7 +16,3 @@ stages:
       - model/data/labels
     outs:
       - yolov5/runs/train/exp
-  dvc_push:
-    cmd: dvc push
-    deps:
-      - yolov5/runs/train/exp
