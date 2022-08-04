@@ -51,8 +51,7 @@ jobs:
         run: |
           dvc pull
       - id: 'dvc_repro'
-        name: 'Reproduce and commit all stages of DVC pipeline'
+        name: 'Reproduce and push all stages of DVC pipeline'
         run: |
           dvc repro -f
-          dvc commit --quiet
           dvc push
