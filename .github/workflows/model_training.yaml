@@ -1,8 +1,10 @@
 name: Model Training
 on:
   pull_request:
+    types: [opened, reopened]
     branches:
       - dev
+
 jobs:
   deploy-runner:
     if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
@@ -18,6 +20,7 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_APP_CREDENTIALS_DATA }}
         run: |
           cml runner --labels=cml-gpu --single --cloud=gcp --cloud-region=us-west --cloud-type=m+k80
+
   train-model:
     if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
     needs: deploy-runner
@@ -51,7 +54,32 @@ jobs:
         run: |
           dvc pull
       - id: 'dvc_repro'
-        name: 'Reproduce and push all stages of DVC pipeline'
+        name: 'Reproduce DVC pipeline'
         run: |
           dvc repro -f
           dvc push
+      - id: 'publish_metrics'
+        name: 'Publish model metrics'
+        run: |
+          CODEBLOCK="\`\`\`"
+          
+          echo "# Model Training Report" >> report.md
+          
+          echo "## GPU Configuration" >> report.md
+          echo $CODEBLOCK >> report.md
+          nvidia-smi >> report.md
+          echo $CODEBLOCK >> report.md
+          
+          echo "## Training Results and Metrics" >> report.md
+          echo "### Evolution of Metrics" >> report.md
+          cml publish --md yolov5/runs/train/exp/results.png >> report.md
+          echo "### Confusion Matrix" >> report.md
+          cml publish --md yolov5/runs/train/exp/confusion_matrix.png >> report.md
+          
+          cml-send-comment report.md
+      - id: 'git_commit'
+        name: 'Commit artifact changes to Git'
+        run: |
+          git add .
+          git commit -m "[DVC] Automatically updated model artifacts after training run"
+          git push
