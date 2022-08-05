@@ -87,4 +87,4 @@ jobs:
           
           git add .
           git commit -m "[DVC] Automatically updated model artifacts after training run"
-          git push
+          git push origin HEAD:${GITHUB_REF##*/}
