@@ -82,6 +82,9 @@ jobs:
       - id: 'git_commit'
         name: 'Commit artifact changes to Git'
         run: |
+          git config user.name "GitHub Actions"
+          git config user.email "<>"
+          
           git add .
           git commit -m "[DVC] Automatically updated model artifacts after training run"
           git push
