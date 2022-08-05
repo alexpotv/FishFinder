@@ -60,6 +60,8 @@ jobs:
           dvc push
       - id: 'publish_metrics'
         name: 'Publish model metrics'
+        env:
+          REPO_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           CODEBLOCK="\`\`\`"
           
