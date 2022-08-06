@@ -33,6 +33,8 @@ jobs:
       id-token: 'write'
     steps:
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
       - uses: iterative/setup-cml@v1
       - id: 'clone_yolov5'
         name: 'Clone YoloV5 locally'
@@ -81,10 +83,10 @@ jobs:
           cml-send-comment report.md
       - id: 'git_commit'
         name: 'Commit artifact changes to Git'
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "<>"
-          
-          git add .
-          git commit -m "[DVC] Automatically updated model artifacts after training run"
-          git push https://alexpotv:${{ secrets.GH_TOKEN }}@github.com/alexpotv/fishfinder.git HEAD:${GITHUB_REF##*/}
+        uses: gr2m/create-or-update-pull-request-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commit-message: "[DVC] Updated artifacts after training run"
+          author: "DVC Bot <>"
+          branch: "${GITHUB_REF##*/}"
