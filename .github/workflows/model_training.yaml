@@ -88,5 +88,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           commit-message: "[DVC] Updated artifacts after training run"
-          author: "DVC Bot <>"
+          author: "DVC Bot <dvc@bot.com>"
           branch: "${GITHUB_REF##*/}"
