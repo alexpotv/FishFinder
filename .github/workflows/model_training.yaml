@@ -87,4 +87,4 @@ jobs:
           
           git add .
           git commit -m "[DVC] Automatically updated model artifacts after training run"
-          git push https://${{ secrets.GH_TOKEN }}@github.com/alexpotv/fishfinder.git HEAD:${GITHUB_REF##*/}
+          git push https://alexpotv:${{ secrets.GH_TOKEN }}@github.com/alexpotv/fishfinder.git HEAD:${GITHUB_REF##*/}
