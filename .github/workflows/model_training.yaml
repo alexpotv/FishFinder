@@ -89,4 +89,4 @@ jobs:
         with:
           commit-message: "[DVC] Updated artifacts after training run"
           author: "DVC Bot <dvc@bot.com>"
-          branch: "${{ GITHUB_REF_NAME }}"
+          branch: "$GITHUB_REF_NAME"
