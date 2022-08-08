@@ -1,0 +1,93 @@
+name: Model Training
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches:
+      - dev
+
+jobs:
+  deploy-runner:
+    if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: iterative/setup-cml@v1
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Deploy runner on GCP Compute Engine instance
+        env:
+          REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_APP_CREDENTIALS_DATA }}
+        run: |
+          cml runner --labels=cml-gpu --single --cloud=gcp --cloud-region=us-west --cloud-type=m+k80
+
+  train-model:
+    if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
+    needs: deploy-runner
+    runs-on: cml-gpu
+    container:
+      image: docker://ghcr.io/iterative/cml:0-dvc2-base1
+      options: --gpus all
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - uses: iterative/setup-cml@v1
+      - id: 'clone_yolov5'
+        name: 'Clone YoloV5 locally'
+        run: |
+          git clone https://github.com/ultralytics/yolov5.git
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0.8.0'
+        with:
+          credentials_json: ${{ secrets.GCLOUD_CREDENTIALS }}
+      - id: 'install_requirements'
+        name: 'Install requirements'
+        run: |
+          pip install -r requirements.txt
+          pip install -r yolov5/requirements.txt
+          apt-get update && apt-get install libgl1
+      - id: 'dvc_pull'
+        name: 'Pull data from remote'
+        run: |
+          dvc pull
+      - id: 'dvc_repro'
+        name: 'Reproduce DVC pipeline'
+        run: |
+          dvc repro -f
+          dvc push
+      - id: 'git_commit'
+        name: 'Commit artifact changes to Git'
+        uses: gr2m/create-or-update-pull-request-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          commit-message: "[DVC] Updated artifacts after training run"
+          author: "DVC Bot <dvc@bot.com>"
+          branch: "${{ github.head_ref }}"
+      - id: 'publish_metrics'
+        name: 'Publish model metrics'
+        env:
+          REPO_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          CODEBLOCK="\`\`\`"
+          
+          echo "# Model Training Report" >> report.md
+          
+          echo "## GPU Configuration" >> report.md
+          echo $CODEBLOCK >> report.md
+          nvidia-smi >> report.md
+          echo $CODEBLOCK >> report.md
+          
+          echo "## Training Results and Metrics" >> report.md
+          echo "### Evolution of Metrics" >> report.md
+          cml publish --md yolov5/runs/train/exp/results.png >> report.md
+          echo "### Confusion Matrix" >> report.md
+          cml publish --md yolov5/runs/train/exp/confusion_matrix.png >> report.md
+          
+          cml send-comment --pr report.md
+      
