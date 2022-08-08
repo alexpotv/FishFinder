@@ -10,7 +10,7 @@
 # Model Training Report
 ## GPU Configuration
 ```
-Mon Aug  8 21:06:35 2022       
+Mon Aug  8 21:30:16 2022       
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 470.141.03   Driver Version: 470.141.03   CUDA Version: 11.4     |
 |-------------------------------+----------------------+----------------------+
@@ -19,7 +19,7 @@ Mon Aug  8 21:06:35 2022
 |                               |                      |               MIG M. |
 |===============================+======================+======================|
 |   0  Tesla K80           Off  | 00000000:00:04.0 Off |                    0 |
-| N/A   46C    P0    68W / 149W |      0MiB / 11441MiB |     83%      Default |
+| N/A   39C    P0    57W / 149W |      0MiB / 11441MiB |    100%      Default |
 |                               |                      |                  N/A |
 +-------------------------------+----------------------+----------------------+
                                                                                
@@ -33,6 +33,6 @@ Mon Aug  8 21:06:35 2022
 ```
 ## Training Results and Metrics
 ### Evolution of Metrics
-![](https://asset.cml.dev/239906e1cee5685f489c61e17becd1f38a64b41e?cml=png&cache-bypass=e58d2552-cacd-4da6-be5a-845400ebf8f8)
+![](https://asset.cml.dev/6681a277da5e3bb839c2ad4b184989d54c48506b?cml=png&cache-bypass=49a53426-b33c-4e5d-95ed-1cc644487550)
 ### Confusion Matrix
-![](https://asset.cml.dev/ffedf10c2b4331b3c062c45a4753309a463cb233?cml=png&cache-bypass=e7037420-9a60-46c0-8c49-9817b86cf920)
+![](https://asset.cml.dev/ffedf10c2b4331b3c062c45a4753309a463cb233?cml=png&cache-bypass=07b9a302-7990-48ad-8b9a-71b85bbbd924)

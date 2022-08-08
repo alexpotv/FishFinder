@@ -15,11 +15,11 @@ stages:
       md5: 049b29a657acb53b81a36d305a499f40
       size: 8
     - path: model/data/images
-      md5: b9588dbd6365c97dfcc85248e5029c68.dir
+      md5: 661a7e239b992a0bb1c5c0cd9d715eae.dir
       size: 105188908
       nfiles: 59
     - path: model/data/labels
-      md5: 3401d3ca3a6cab7991623ae58f950863.dir
+      md5: b6a98a82e30dcb19b9a2448cd07cc38a.dir
       size: 46292
       nfiles: 59
   model_training:
@@ -30,17 +30,17 @@ stages:
       md5: 049b29a657acb53b81a36d305a499f40
       size: 8
     - path: model/data/images
-      md5: b9588dbd6365c97dfcc85248e5029c68.dir
+      md5: 661a7e239b992a0bb1c5c0cd9d715eae.dir
       size: 105188908
       nfiles: 59
     - path: model/data/labels
-      md5: 995cabfc4c9d7eb2d287d5ac8c3c4871.dir
-      size: 71939
+      md5: 92a22ac9dadfaeb7acb0541f24b75cf1.dir
+      size: 72509
       nfiles: 61
     outs:
     - path: yolov5/runs/train/exp
-      md5: 69569c3eff9c008a36825db85fe95246.dir
-      size: 31278526
+      md5: 62abc7551e007ee6f461389ca4170532.dir
+      size: 31255084
       nfiles: 23
   dvc_push:
     cmd: dvc push
