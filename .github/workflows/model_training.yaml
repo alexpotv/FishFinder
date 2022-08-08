@@ -60,6 +60,15 @@ jobs:
         run: |
           dvc repro -f
           dvc push
+      - id: 'git_commit'
+        name: 'Commit artifact changes to Git'
+        uses: gr2m/create-or-update-pull-request-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          commit-message: "[DVC] Updated artifacts after training run"
+          author: "DVC Bot <dvc@bot.com>"
+          branch: "${{ github.head_ref }}"
       - id: 'publish_metrics'
         name: 'Publish model metrics'
         env:
@@ -80,13 +89,5 @@ jobs:
           echo "### Confusion Matrix" >> report.md
           cml publish --md yolov5/runs/train/exp/confusion_matrix.png >> report.md
           
-          cml send-comment report.md
-      - id: 'git_commit'
-        name: 'Commit artifact changes to Git'
-        uses: gr2m/create-or-update-pull-request-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        with:
-          commit-message: "[DVC] Updated artifacts after training run"
-          author: "DVC Bot <dvc@bot.com>"
-          branch: "${{ github.head_ref }}"
+          cml send-comment --pr report.md
+      
