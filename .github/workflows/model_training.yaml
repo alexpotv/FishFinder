@@ -23,7 +23,7 @@ jobs:
 
   train-model:
     if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
-    needs: deploy-runner
+    #needs: deploy-runner
     runs-on: ubuntu-latest
     container:
       image: docker://ghcr.io/iterative/cml:0-dvc2-base1
