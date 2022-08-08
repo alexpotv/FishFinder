@@ -6,3 +6,4 @@ model/data/labels
 model/data/classes.txt
 yolov5
 *.pyc
+gha-creds-*.json
