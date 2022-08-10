@@ -29,6 +29,25 @@ def build_err_response(error: str, description: str, status_code: int):
     )
 
 
+def tensor_to_detection(tensor: torch.Tensor):
+    """
+    Converts a Tensor object to JSON-serializable list of detections
+    :param tensor: The Tensor object to convert
+    :return: The list of detections
+    """
+    x1, y1, x2, y2 = tuple(tensor[0:4])
+    confidence, class_no = tuple(tensor[4:6])
+
+    return {
+        "class_no": int(class_no),
+        "confidence": float(confidence),
+        "x_center": round(abs((float(x1) + float(x2)) / 2)),
+        "y_center": round(abs((float(y1) + float(y2)) / 2)),
+        "width": round(abs(float(x2) - float(x1))),
+        "height": round(abs(float(y2) - float(y1)))
+    }
+
+
 @app.route('/health', methods=["GET"])
 def health_check():
     return {"status": "ok"}
@@ -62,11 +81,11 @@ def detect():
         for i in range(len(results.names)):
             classes[i] = results.names[i]
 
-        predictions = results.pred[0]
+        predictions = [tensor_to_detection(x) for x in results.pred[0]]
 
         json_response = {
             "labels": classes,
-            "detections": []
+            "detections": predictions
         }
         return Response(
             json.dumps(json_response),
