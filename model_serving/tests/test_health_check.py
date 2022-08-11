@@ -3,24 +3,24 @@ Tests for Health Check endpoint of model serving
 """
 import pytest
 
-from model_serving.app import app as flask_app_instance
+from model_serving import create_app
 
 
 @pytest.fixture()
-def app():
-    yield flask_app_instance
+def prod_model_app():
+    yield create_app()
 
 
 @pytest.fixture()
-def client(app):
-    return app.test_client()
+def prod_model_client(prod_model_app):
+    return prod_model_app.test_client()
 
 
 class TestHealthCheck:
     """
     Test case for health check
     """
-    def test_get_health_check(self, client):
+    def test_get_health_check(self, prod_model_client):
         """
         Tests the response from a valid GET request to the health check
 
@@ -32,7 +32,7 @@ class TestHealthCheck:
         :raise AssertionError: If the response status code is not 200
         :raise AssertionError: If the response data is not the expected value
         """
-        response = client.get("/health")
+        response = prod_model_client.get("/health")
 
         assert response.status_code == 200
 
