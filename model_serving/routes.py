@@ -1,15 +1,12 @@
 """
-Flask app for serving a REST API and interacting with the model
+Route definitions for model serving Flask application
 """
-from flask import Flask, request, jsonify, Response
-import numpy as np
-import cv2
-import torch
+from flask import Blueprint, Response, request, current_app
 import json
-
-app = Flask(__name__)
-
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='./model_serving/model', force_reload=True)
+import torch
+import cv2
+import numpy as np
+route_blueprint = Blueprint('route_blueprint', __name__)
 
 
 def build_err_response(error: str, description: str, status_code: int):
@@ -48,12 +45,12 @@ def tensor_to_detection(tensor: torch.Tensor):
     }
 
 
-@app.route('/health', methods=["GET"])
+@route_blueprint.route('/health', methods=["GET"])
 def health_check():
     return {"status": "ok"}
 
 
-@app.route('/detect', methods=["POST"])
+@route_blueprint.route('/detect', methods=["POST"])
 def detect():
     """
     Performs the inference using the model on the provided image
@@ -76,7 +73,7 @@ def detect():
         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
 
         # Performing inference and returning results
-        results = model(img)
+        results = current_app.config['MODEL'](img)
         classes = {}
         for i in range(len(results.names)):
             classes[i] = results.names[i]
@@ -95,5 +92,5 @@ def detect():
 
     except Exception as e:
         return build_err_response("INVALID_IMAGE_FILE",
-                                  "The image file provided is invalid.",
+                                  f"The image file provided is invalid: {e}",
                                   400)
