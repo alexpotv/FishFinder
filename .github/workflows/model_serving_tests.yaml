@@ -16,4 +16,4 @@ jobs:
       - id: 'run-pytest'
         name: 'Run PyTest'
         run: |
-          pytest
+          python -m pytest
