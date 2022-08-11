@@ -1,8 +1,8 @@
 """
 Flask application factory
 """
-from flask import Flask
 import torch
+from flask import Flask
 
 
 def create_app(testing_model=None):
