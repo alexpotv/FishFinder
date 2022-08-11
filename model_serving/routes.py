@@ -1,11 +1,13 @@
 """
 Route definitions for model serving Flask application
 """
-from flask import Blueprint, Response, request, current_app
 import json
-import torch
+
 import cv2
 import numpy as np
+import torch
+from flask import Blueprint, Response, request, current_app
+
 route_blueprint = Blueprint('route_blueprint', __name__)
 
 
