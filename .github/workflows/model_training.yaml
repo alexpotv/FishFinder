@@ -90,4 +90,3 @@ jobs:
           cml publish --md yolov5/runs/train/exp/confusion_matrix.png >> report.md
           
           cml send-comment --pr report.md
-      

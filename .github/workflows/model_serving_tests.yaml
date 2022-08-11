@@ -1,0 +1,21 @@
+name: Tests - Model Serving
+on: push
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: iterative/setup-cml@v1
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - id: 'install_requirements'
+        name: 'Install requirements'
+        run: |
+          pip install -r requirements.txt
+          pip install -r yolov5/requirements.txt
+          apt-get update && apt-get install libgl1
+      - id: 'run-pytest'
+        name: 'Run PyTest'
+        run: |
+          pytest
