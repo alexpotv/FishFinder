@@ -3,6 +3,7 @@ Flask application factory
 """
 import torch
 from flask import Flask
+from .routes import route_blueprint
 
 
 def create_app(testing_model=None):
@@ -11,10 +12,8 @@ def create_app(testing_model=None):
     if testing_model:
         app.config['MODEL'] = testing_model
     else:
-        app.config['MODEL'] = torch.hub.load('ultralytics/yolov5', 'custom', path='./model_serving/api/model',
-                                             force_reload=True)
+        app.config['MODEL'] = torch.hub.load('ultralytics/yolov5', 'custom', path='./api/model', force_reload=False, skip_validation=True)
 
-    from model_serving.api.routes import route_blueprint
     app.register_blueprint(route_blueprint)
 
     return app
