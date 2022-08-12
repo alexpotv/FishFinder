@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from model_serving import create_app
+from model_serving.api import create_app
 
 
 @pytest.fixture(scope='function')
@@ -75,7 +75,7 @@ class TestDetect:
     """
     Test cases requests to detect endpoint
     """
-    TEST_IMAGE_FILE_PATH = "./model_serving/tests/static/test_image.png"
+    TEST_IMAGE_FILE_PATH = "./model_serving/api/tests/static/test_image.png"
 
     def test_no_image_file(self, prod_model_client):
         """

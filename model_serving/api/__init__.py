@@ -11,10 +11,10 @@ def create_app(testing_model=None):
     if testing_model:
         app.config['MODEL'] = testing_model
     else:
-        app.config['MODEL'] = torch.hub.load('ultralytics/yolov5', 'custom', path='./model_serving/model',
+        app.config['MODEL'] = torch.hub.load('ultralytics/yolov5', 'custom', path='./model_serving/api/model',
                                              force_reload=True)
 
-    from model_serving.routes import route_blueprint
+    from model_serving.api.routes import route_blueprint
     app.register_blueprint(route_blueprint)
 
     return app

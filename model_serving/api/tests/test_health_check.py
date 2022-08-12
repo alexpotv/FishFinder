@@ -3,7 +3,7 @@ Tests for Health Check endpoint of model serving
 """
 import pytest
 
-from model_serving import create_app
+from model_serving.api import create_app
 
 
 @pytest.fixture()
