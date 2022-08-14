@@ -1,13 +1,13 @@
 name: Model Training
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, labeled]
     branches:
       - dev
 
 jobs:
   deploy-runner:
-    if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
+    if: github.event.label.name == 'model' || github.event.label.name == 'dataset'
     runs-on: ubuntu-latest
     steps:
       - uses: iterative/setup-cml@v1
@@ -22,7 +22,7 @@ jobs:
           cml runner --labels=cml-gpu --single --cloud=gcp --cloud-region=us-west --cloud-type=m+k80
 
   train-model:
-    if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
+    if: github.event.label.name == 'model' || github.event.label.name == 'dataset'
     needs: deploy-runner
     runs-on: cml-gpu
     container:
@@ -90,4 +90,3 @@ jobs:
           cml publish --md yolov5/runs/train/exp/confusion_matrix.png >> report.md
           
           cml send-comment --pr report.md
-      
