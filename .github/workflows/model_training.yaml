@@ -1,7 +1,7 @@
 name: Model Training
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, labeled]
     branches:
       - dev
 
