@@ -1,5 +1,7 @@
 # FishFinder
 
+[![Tests - Model Serving](https://github.com/alexpotv/FishFinder/actions/workflows/model_serving_tests.yaml/badge.svg?branch=main)](https://github.com/alexpotv/FishFinder/actions/workflows/model_serving_tests.yaml)
+
 **FishFinder** is a computer vision project based on images from Monterey Bay Aquarium's live-streaming camera.
 
 ## Interacting with FishFinder
