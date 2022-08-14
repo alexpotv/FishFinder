@@ -19,11 +19,10 @@ jobs:
           REPO_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_APP_CREDENTIALS_DATA }}
         run: |
-          echo ${{ github.event }}
           cml runner --labels=cml-gpu --single --cloud=gcp --cloud-region=us-west --cloud-type=m+k80
 
   train-model:
-    if: ${{ github.event.label.name == 'model' }} || ${{ github.event.label.name == 'dataset' }}
+    if: github.event.label.name == 'model' || github.event.label.name == 'dataset'
     needs: deploy-runner
     runs-on: cml-gpu
     container:
