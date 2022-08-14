@@ -18,7 +18,7 @@ To run the model via Docker-Compose, run the following commands:
 
 `docker-compose up`
 
-### Interacting with the model-serbing API
+### Interacting with the model-serving API
 
 To interact with the model-serving API, send HTTP requests according to the **[API Reference](https://github.com/alexpotv/FishFinder/wiki/Model-API-Reference)**.
 
