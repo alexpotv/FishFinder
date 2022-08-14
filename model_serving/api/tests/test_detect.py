@@ -14,7 +14,10 @@ def prod_model_app():
     Flask model-serving app created with production model
     :return: The created app
     """
-    yield create_app()
+    mocked_model = MagicMock()
+    # mocked_model.return_value.pred = [[[10, 10, 20, 20, 1, 0]]]
+    # mocked_model.return_value.names = ["fish"]
+    yield create_app(mocked_model)
 
 
 @pytest.fixture()

@@ -3,12 +3,17 @@ Tests for Health Check endpoint of model serving
 """
 import pytest
 
+from unittest.mock import MagicMock
+
 from model_serving.api import create_app
 
 
 @pytest.fixture()
 def prod_model_app():
-    yield create_app()
+    mocked_model = MagicMock()
+    # mocked_model.return_value.pred = [[[10, 10, 20, 20, 1, 0]]]
+    # mocked_model.return_value.names = ["fish"]
+    yield create_app(mocked_model)
 
 
 @pytest.fixture()
