@@ -1,24 +1,26 @@
 # FishFinder
 
+[![Tests - Model Serving](https://github.com/alexpotv/FishFinder/actions/workflows/model_serving_tests.yaml/badge.svg?branch=main)](https://github.com/alexpotv/FishFinder/actions/workflows/model_serving_tests.yaml)
+
 **FishFinder** is a computer vision project based on images from Monterey Bay Aquarium's live-streaming camera.
+
+![example](https://user-images.githubusercontent.com/59039919/184552999-84656ff3-c7af-4395-a8dd-b74fe1c7b854.jpeg)
 
 ## Interacting with FishFinder
 
-### Installing the requirements
+### Running the model with Docker-Compose
 
-To launch the app, make sure the environment you are using is up-to-date py running the following command from the root 
-of the project:
+To run the model via Docker-Compose, run the following commands:
 
-```pip install -r requirements.txt```
+`cd model_serving`
 
-### Launching the Streamlit interface
+`docker-compose build`
 
-To launch the Streamlit web interface locally, run the following command from the root of the project:
+`docker-compose up`
 
-```streamlit run app.py```
+### Interacting with the model-serving API
 
-Streamlit will open a new browser tab with the interface. If the browser tab does not pop up, simply take a look at the 
-console, where the local URL will be displayed.
+To interact with the model-serving API, send HTTP requests according to the **[API Reference](https://github.com/alexpotv/FishFinder/wiki/Model-API-Reference)**.
 
 ## Model
 
