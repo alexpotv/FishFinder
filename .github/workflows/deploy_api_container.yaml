@@ -1,0 +1,20 @@
+name: Publish Docker image
+on:
+  push:
+    branches:
+    - 32-container-deployment-to-registry-on-merge
+jobs:
+  push_to_registry:
+    name: Push Docker image to GitHub Container Registry
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          registry: ghcr.io
+          repository: alexpotv/fishfinder
+          tags: ${{ github.sha }}
+          dockerfile: model_serving/api/Dockerfile
