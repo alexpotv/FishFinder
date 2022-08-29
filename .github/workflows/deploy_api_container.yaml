@@ -47,7 +47,8 @@ jobs:
           push: true
           tags: latest
           labels: ${{ steps.meta.outputs.labels }}
-          repository: alexpotv/fishfinder
+          repository: ${{ github.repository }}
+          registry: ${{ env.REGISTRY }}
 
 #      - name: Push to GitHub Packages
 #        uses: docker/build-push-action@v1
