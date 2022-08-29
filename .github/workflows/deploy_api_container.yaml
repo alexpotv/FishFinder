@@ -44,9 +44,9 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           context: .
-          file: ${{ matrix.dockerfile }}
+          file: ./model_serving/api/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: latest
           labels: ${{ steps.meta.outputs.labels }}
 
 #      - name: Push to GitHub Packages
