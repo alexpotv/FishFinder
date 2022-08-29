@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - dockerfile: ./model_serving/api/Dockerfile
+          - dockerfile: model_serving/api/Dockerfile
             image: FishFinderAPI
 
     permissions:
