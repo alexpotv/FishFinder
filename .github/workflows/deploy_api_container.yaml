@@ -17,7 +17,7 @@ jobs:
       matrix:
         include:
           - dockerfile: ./model_serving/api/Dockerfile
-            image: ghcr.io/alexpotv/FishFinderAPI
+            image: FishFinderAPI
 
     permissions:
       contents: read
@@ -44,9 +44,9 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           context: .
-          file: ./model_serving/api/Dockerfile
+          file: ${{ matrix.dockerfile }}
           push: true
-          tags: latest
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
 #      - name: Push to GitHub Packages
