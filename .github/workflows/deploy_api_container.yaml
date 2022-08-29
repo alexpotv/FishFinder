@@ -1,0 +1,47 @@
+name: Build and push Docker images
+
+on:
+  push:
+    branches:
+    - dev
+
+jobs:
+  build_and_push_api:
+    name: Build and push API Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        id: checkout-api
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image fishfinder/api
+        id: build-push-api
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          registry: ghcr.io
+          repository: alexpotv/fishfinder/api
+          tags: latest
+          labels: org.opencontainers.image.source=https://github.com/alexpotv/fishfinder
+          dockerfile: model_serving/api/Dockerfile
+
+  build_and_push_nginx:
+    name: Build and push Nginx Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        id: checkout-nginx
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image fishfinder/nginx
+        id: build-push-nginx
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          registry: ghcr.io
+          repository: alexpotv/fishfinder/nginx
+          tags: latest
+          labels: org.opencontainers.image.source=https://github.com/alexpotv/fishfinder
+          dockerfile: model_serving/nginx/Dockerfile
