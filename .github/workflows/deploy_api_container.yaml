@@ -47,6 +47,7 @@ jobs:
           push: true
           tags: latest
           labels: ${{ steps.meta.outputs.labels }}
+          repository: alexpotv/FishFinder
 
 #      - name: Push to GitHub Packages
 #        uses: docker/build-push-action@v1
