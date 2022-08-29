@@ -16,5 +16,6 @@ jobs:
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           registry: ghcr.io
           repository: alexpotv/fishfinder
+          image: ghcr.io/alexpotv/FishFinderAPI
           tags: alexpotv/FishFinderAPI:latest
           dockerfile: model_serving/api/Dockerfile
