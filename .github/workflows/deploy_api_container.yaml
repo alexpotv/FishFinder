@@ -17,25 +17,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@v2
+      - name: Build and push Docker image FishFinder API
+        uses: docker/build-push-action@v3
         with:
-          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: FishFinderAPI
-
-      - name: Build and push Docker image FishFinder API
-        uses: docker/build-push-action@v1
-        with:
-          dockerfile: model_serving/api/Dockerfile
-          push: true
-          tags: latest
-          labels: ${{ steps.meta.outputs.labels }}
-          repository: alexpotv/fishfinder
           registry: ghcr.io
+          repository: alexpotv/fishfinder
+          tags: FishFinderAPI:latest
+          dockerfile: model_serving/api/Dockerfile
+
+
