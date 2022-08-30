@@ -5,7 +5,7 @@ services:
   api:
     container_name: flask_api
     restart: always
-    build: ./api
+    image: ghcr.io/alexpotv/fishfinder/api:latest
     volumes: ['./api:/api']
     networks:
       - apinetwork
@@ -17,7 +17,7 @@ services:
   nginx:
     container_name: nginx
     restart: always
-    build: ./nginx
+    image: ghcr.io/alexpotv/fishfinder/nginx:latest
     networks:
       - apinetwork
     expose:
